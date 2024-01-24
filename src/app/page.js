@@ -2,6 +2,11 @@
 import {
   Box,
   Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
   Container,
   Grid,
   Pagination,
@@ -59,7 +64,14 @@ export default function Home() {
             />
             <Button
               variant="contained"
-              sx={{ width: "19%" }}
+              sx={{
+                width: "19%",
+                backgroundColor: "#ee4d2d",
+                "&:hover": {
+                  backgroundColor: "#941900",
+                  border: "2px solid #ee4d2d",
+                },
+              }}
               onClick={() => router.push("/cartlist")}
             >{`Cart (${cart.length})`}</Button>
           </Box>
@@ -70,33 +82,37 @@ export default function Home() {
               key={i}
               item
               xs={12}
-              md={4}
+              md={2.3}
               sx={{ display: "flex", justifyContent: "center" }}
             >
-              <Box
+              <Card
                 sx={{
-                  width: "100%",
-                  border: "1px solid #dbdbdb",
-                  borderRadius: "8px",
-                  padding: "12px",
-                  gap: 2,
+                  minWidth: "100%",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    border: "2px solid #ee4d2d",
+                  },
                 }}
               >
-                <Box
-                  sx={{ width: "100%", height: "300px", overflow: "hidden" }}
-                >
-                  <Image
-                    src={v.thumbnail}
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={v.thumbnail}
                     alt="item"
-                    width={400}
-                    height={400}
-                    layout="responsive"
                   />
-                </Box>
-                <Typography variant="h5"> {v.title}</Typography>
-                <Typography>Price {v.price}$</Typography>
-                <AddCart product={v} />
-              </Box>
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" fontSize={'16px'} fontWeight={700} component="div">
+                      {v.title}
+                    </Typography>
+                    <Typography color={"#ee4d2d"}>Price {v.price}$</Typography>
+                    <Typography>stock {v.stock}EA</Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <AddCart product={v} />
+                </CardActions>
+              </Card>
             </Grid>
           ))
         ) : (
@@ -121,13 +137,13 @@ export default function Home() {
             onChange={handleChangePage}
             sx={{
               "& .Mui-selected": {
-                bgcolor: "#0A73D4 !important",
+                bgcolor: "#ee4d2d !important",
                 color: "#FFFFFF",
                 borderRadius: "17px",
                 width: "35px",
                 height: "23px",
                 "&:hover": {
-                  backgroundColor: "#0A73D4",
+                  backgroundColor: "#941900",
                 },
               },
             }}
